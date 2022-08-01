@@ -79,7 +79,7 @@ class Wallet:
 
     @fee_currency.setter
     def fee_currency(self, new_fee_currency: str):
-        if not self.web3.isAddress(new_fee_currency):
+        if not self.web3.isAddress(new_fee_currency) and new_fee_currency is not None:
             raise TypeError("Incorrect fee currency address")
         self._fee_currency = new_fee_currency
 
@@ -144,10 +144,6 @@ class Wallet:
             constructed transaction in dict
         """
         try:
-            if not self._fee_currency:
-                raise ValueError(
-                    "Can't construct transaction without fee currency, set fee currency please")
-
             nonce = self.web3.eth.getTransactionCount(
                 self.active_account.address)
             gas_price = self._gas_price if self._gas_price else self.get_network_gas_price()

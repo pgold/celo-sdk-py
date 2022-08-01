@@ -120,7 +120,7 @@ TRANSACTION_VALID_VALUES = {
     'nonce': is_int_or_prefixed_hexstr,
     'gasPrice': is_int_or_prefixed_hexstr,  # change this
     'gas': is_int_or_prefixed_hexstr,  # change this
-    'feeCurrency': lambda val: is_valid_address(val),
+    'feeCurrency': is_empty_or_checksum_address,
     'gatewayFeeRecipient': is_empty_or_checksum_address,
     'gatewayFee': is_int_or_prefixed_hexstr,
     'to': is_empty_or_checksum_address,
